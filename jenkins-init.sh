@@ -7,7 +7,7 @@ echo "2.0" > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
 # cp /usr/share/jenkins/sidekick/some-groovy-script.groovy /usr/share/jenkins/ref/init.groovy.d/
 
 # -- copy initial config.xml file
-cp /config.xml /usr/share/jenkins/ref/config.xml
+cp /usr/share/jenkins/sidekick/config/* /usr/share/jenkins/ref/
 
 # -- check and wait if plugins.txt does not exist
 while [ ! -f /usr/share/jenkins/sidekick/plugins.txt ]; do
