@@ -1,4 +1,4 @@
-FROM busybox:latest
+FROM alpine:latest
 
 # -- expose the volume to jenkins-master
 VOLUME /usr/share/jenkins/sidekick
