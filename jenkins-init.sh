@@ -3,8 +3,8 @@
 # -- tell Jenkins start up code that this instance is already configured
 echo "2.0" > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
 
-# -- TODO: copy other init.groovy.d scripts
-# cp /usr/share/jenkins/sidekick/some-groovy-script.groovy /usr/share/jenkins/ref/init.groovy.d/
+# -- copy other init.groovy.d scripts
+cp /usr/share/jenkins/sidekick/*.groovy /usr/share/jenkins/ref/init.groovy.d/
 
 # -- copy initial config.xml file
 cp /usr/share/jenkins/sidekick/config/* /usr/share/jenkins/ref/

@@ -13,7 +13,7 @@ COPY plugins.txt /usr/share/jenkins/sidekick/plugins.txt
 COPY config/* /usr/share/jenkins/sidekick/config/
 
 # -- later add other seutp scripts to config/init.groovy.d
-#COPY config/init.groovy.d /usr/share/jenkins/sidekick/init.groovy.d
+COPY init.groovy.d/* /usr/share/jenkins/sidekick/init.groovy.d/
 
 # -- set executable flag
 RUN chmod +x /usr/share/jenkins/sidekick/jenkins-init.sh
