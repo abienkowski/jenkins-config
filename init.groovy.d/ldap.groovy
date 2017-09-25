@@ -1,14 +1,8 @@
-import jenkins.*
-
-//import hudson.*
-//import com.cloudbees.plugins.credentials.*
-//import com.cloudbees.plugins.credentials.common.*
-//import com.cloudbees.plugins.credentials.domains.*
-//import com.cloudbees.jenkins.plugins.sshcredentials.impl.*
-//import hudson.plugins.sshslaves.*;
-//import hudson.model.*
-//import jenkins.model.*
-//import hudson.security.*
+import com.michelin.cio.hudson.plugins.rolestrategy.RoleBasedAuthorizationStrategy;
+import hudson.security.SecurityRealm;
+import hudson.security.LDAPSecurityRealm;
+import jenkins.securiey.plugins.ldap.FromGroupSearchLDAPGroupMembershipStrategy;
+import jenkins.model.Jenkins;
 
 /* configure LDAP security realm */
 /* eg.
