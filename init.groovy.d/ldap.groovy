@@ -1,8 +1,12 @@
 import com.michelin.cio.hudson.plugins.rolestrategy.RoleBasedAuthorizationStrategy;
 import hudson.security.SecurityRealm;
 import hudson.security.LDAPSecurityRealm;
-import jenkins.securiey.plugins.ldap.FromGroupSearchLDAPGroupMembershipStrategy;
+import hudson.util.Secret;
+import jenkins.security.plugins.ldap.FromGroupSearchLDAPGroupMembershipStrategy;
+import jenkins.model.IdStrategy;
 import jenkins.model.Jenkins;
+
+def env = System.getenv()
 
 /* configure LDAP security realm */
 /* eg.
@@ -15,15 +19,15 @@ import jenkins.model.Jenkins;
    LDAP_MANAGER_DN=cn=System,ou=people,dc=company,dc=com
    LDAP_MANAGER_KEY=<password for the LDAP_MANAGER_DN>
 */
-def ldap_server = env['LDAP_URL']
-def ldap_rootDN = env['ROOT_DN']
-def ldap_userSearchBase = env['LDAP_USER_SEARCH_BASE']
+def ldap_server = env.LDAP_URL
+def ldap_rootDN = env.ROOT_DN
+def ldap_userSearchBase = null //env['LDAP_USER_SEARCH_BASE']
 def ldap_userSearch = 'mail={0}'
-def ldap_groupSearchBase = env['LDAP_GROUP_SEARCH_BASE']
-def ldap_groupSearchFilter = env['LDAP_GROUP_SEARCH_FILTER']
-def ldap_groupMembershipFilter = env['LDAP_GROUP_MEMBERSHIP_FILTER']
-def ldap_managerDN = env['LDAP_MANAGER_DN']
-def ldap_managerPassword = env['LDAP_MANAGER_KEY']
+def ldap_groupSearchBase = null //env['LDAP_GROUP_SEARCH_BASE']
+def ldap_groupSearchFilter = null //env['LDAP_GROUP_SEARCH_FILTER']
+def ldap_groupMembershipFilter = null //env['LDAP_GROUP_MEMBERSHIP_FILTER']
+def ldap_managerDN = env.LDAP_MANAGER_DN
+def ldap_managerPassword = env.LDAP_MANAGER_KEY
 def ldap_inhibitInferRootDN = true
 def ldap_disableMailAddressResolver = false
 def ldap_displayNameAttributeName = 'displayname'
@@ -40,7 +44,7 @@ SecurityRealm ldap_realm = new LDAPSecurityRealm(
 	ldap_userSearch,
 	ldap_groupSearchBase,
 	ldap_groupSearchFilter,
-	new FromGroupSearchLDAPGroupMembershipStrategy(ldap_groupMembershipFilter),
+	ldap_groupMembershipFilter,
 	ldap_managerDN,
 	Secret.fromString(ldap_managerPassword),
 	ldap_inhibitInferRootDN,
