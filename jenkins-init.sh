@@ -15,6 +15,10 @@ while [ ! -f /usr/share/jenkins/sidekick/plugins.txt ]; do
     sleep 1
 done
 
+# -- inject LDAP secrets into environment
+export LDAP_MANAGER_DN="$(cat /run/secrets/LDAP_MANAGER_DN)"
+export LDAP_MANAGER_KEY="$(cat /run/secrets/LDAP_MANAGER_KEY)"
+
 # -- install all required plugins
 /usr/local/bin/install-plugins.sh < /usr/share/jenkins/sidekick/plugins.txt
 
