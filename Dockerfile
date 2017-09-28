@@ -16,4 +16,3 @@ COPY init.groovy.d/* /usr/share/jenkins/sidekick/init.groovy.d/
 
 # -- expose the volume to jenkins-master
 VOLUME /usr/share/jenkins/sidekick
-

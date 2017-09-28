@@ -19,6 +19,10 @@ done
 export LDAP_MANAGER_DN="$(cat /run/secrets/LDAP_MANAGER_DN)"
 export LDAP_MANAGER_KEY="$(cat /run/secrets/LDAP_MANAGER_KEY)"
 
+# -- create private ssh key from secrets
+mkdir -p $JENKINS_HOME/.ssh
+cat /run/secrets/GIT_SSH_KEY > $JENKINS_HOME/.ssh
+
 # -- install all required plugins
 /usr/local/bin/install-plugins.sh < /usr/share/jenkins/sidekick/plugins.txt
 
