@@ -9,6 +9,7 @@ build-name-setter
 build-timeout
 build-user-vars-plugin
 cloudbees-folder
+copyartifact
 credentials
 credentials-binding
 display-url-api
@@ -40,6 +41,7 @@ mapdb-api
 matrix-auth
 matrix-project
 momentjs
+jenkins-multijob-plugin
 nexus-jenkins-plugin
 pam-auth
 pipeline-build-step

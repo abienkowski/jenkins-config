@@ -1,14 +1,13 @@
 #!/bin/bash
 
 # -- tell Jenkins start up code that this instance is already configured
-echo "$JENKINS_VERSION" > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
-echo "$JENKINS_VERSION" > /usr/share/jenkins/ref/jenkins.install.InstallUtil.lastExecVersion
+echo "$JENKINS_VERSION" > $JENKINS_HOME/jenkins.install.UpgradeWizard.state
 
 # -- copy other init.groovy.d scripts
-cp /usr/share/jenkins/sidekick/init.groovy.d/*.groovy /usr/share/jenkins/ref/init.groovy.d/
+cp -u /usr/share/jenkins/sidekick/init.groovy.d/*.groovy /usr/share/jenkins/ref/init.groovy.d/
 
 # -- copy initial config.xml file
-cp /usr/share/jenkins/sidekick/config/* /usr/share/jenkins/ref/
+cp -u /usr/share/jenkins/sidekick/config/* /usr/share/jenkins/ref/
 
 # -- check and wait if plugins.txt does not exist
 while [ ! -f /usr/share/jenkins/sidekick/plugins.txt ]; do
