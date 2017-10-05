@@ -8,6 +8,11 @@ dpkg-deb -x /usr/share/jenkins/sidekick/packages/less_481-2.1_amd64.deb $JENKINS
 # -- update PATH for user installed packages
 export PATH=$JENKINS_HOME/.local/bin:$JENKINS_HOME/.local/usr/bin:$PATH
 
+# -- add chefdk path if installed
+if [[ -d /opt/chefdk ]]; then
+  export PATH=/opt/chefdk/bin:$PATH
+fi
+
 # -- tell Jenkins start up code that this instance is already configured
 echo -n "$JENKINS_VERSION" > $JENKINS_HOME/jenkins.install.UpgradeWizard.state
 echo -n "$JENKINS_VERSION" > $JENKINS_HOME/jenkins.install.InstallUtil.lastExecVersion
