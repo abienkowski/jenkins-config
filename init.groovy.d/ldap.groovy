@@ -1,4 +1,3 @@
-import com.michelin.cio.hudson.plugins.rolestrategy.RoleBasedAuthorizationStrategy;
 import hudson.security.SecurityRealm;
 import hudson.security.LDAPSecurityRealm;
 import hudson.util.Secret;
@@ -59,9 +58,6 @@ SecurityRealm ldap_realm = new LDAPSecurityRealm(
 
 /* set the LDAP security realm for the Jenkins instance */
 instance.setSecurityRealm(ldap_realm)
-
-/* set Authorization strategy */
-instance.setAuthorizationStrategy(new RoleBasedAuthorizationStrategy())
 
 /* save the configuration */
 instance.save()
