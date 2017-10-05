@@ -1,5 +1,8 @@
 FROM busybox:latest
 
+# -- copy additional OS level packages to be installed at user level
+COPY packages/* /usr/share/jenkins/sidekick/packages/
+
 # -- copy the init script that will be the new entrypoint for jenkins-master
 COPY jenkins-init.sh /usr/share/jenkins/sidekick/jenkins-init.sh
 # -- set executable flag
