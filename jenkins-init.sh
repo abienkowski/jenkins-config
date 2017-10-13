@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # -- install OS level packages required by build tools
-mkdir $JENKINS_HOME/.local
+mkdir -p $JENKINS_HOME/.local
 dpkg-deb -x /usr/share/jenkins/sidekick/packages/groff-base_1.22.3-9_amd64.deb $JENKINS_HOME/.local
 dpkg-deb -x /usr/share/jenkins/sidekick/packages/less_481-2.1_amd64.deb $JENKINS_HOME/.local
 
@@ -32,9 +32,16 @@ done
 export LDAP_MANAGER_DN="$(cat /run/secrets/LDAP_MANAGER_DN)"
 export LDAP_MANAGER_KEY="$(cat /run/secrets/LDAP_MANAGER_KEY)"
 
-# -- create private ssh key from secrets and create known_hosts file
-cat /dev/zero | ssh-keygen -q -N "" 
+# -- create ssh key for the service
+if [[ ! -f ~/.ssh/id_rsa ]]; then
+  cat /dev/zero | ssh-keygen -q -N "" 
+else
+  echo ">>> [jenkins-init.sh] id_rsa file already exists, skipping..."
+fi
+# -- check if a key should be create from a secret
+# -- TODO: setup a convension where SSH_KEY_<something> will create <something>_id_rsa key
 if [[ -f /run/secrets/GIT_SSH_KEY ]]; then
+  # -- create private ssh key from secrets and create known_hosts file
   cat /run/secrets/GIT_SSH_KEY > $JENKINS_HOME/.ssh/git_id_rsa
   chmod 600 $JENKINS_HOME/.ssh/git_id_rsa
   cat << EOF > ~/.ssh/config
@@ -49,6 +56,7 @@ Host ${GIT_HOSTNAME:-"*"}
   IdentityFile ~/.ssh/id_rsa
 EOF
 fi
+
 if [[ -z $GIT_HOSTNAME ]]; then
     ssh-keyscan $GIT_HOSTNAME >> ~/.ssh/known_hosts
 fi

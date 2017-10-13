@@ -6,15 +6,20 @@ import jenkins.model.Jenkins;
 /* get Jenkins instance reference */
 def instance = Jenkins.getInstance();
 
-/* check if RoleBasedAuthorizationStrategy is already configured so it does not get overritten */
+/ RoleBasedAuthorizationStrategy is already configured so it does not get overritten */
 def currentAuthorizationStrategy = instance.getAuthorizationStrategy();
-if (currentAuthenticationStrategy instanceof RoleBasedAuthorizationStrategy) {
-  println "Role based authorisation already enabled."
-  println "Exiting script..."
+
+println ">>> [rolebasedauthentication.groovy] checking currentAuthorizationStrategy: " + currentAuthorizationStrategy.getClass();
+
+if (currentAuthorizationStrategy instanceof RoleBasedAuthorizationStrategy) {
+  println ">>> [rolebasedauthentication.groovy] RoleBasedAuthorisationStrategy already enabled.";
+  println ">>> [rolebasedauthentication.groovy] Exiting script...";
 } else {
   /* check for the initial user to be added to the admin role */
   def env = System.getenv();
   def sid = env.ADMIN_USERNAME;
+
+  println ">>> [rolebasedauthentication.groovy] Adding RoleBasedAuthorisation and admin role.";
 
   /* create RoleBasedAuthorizationStrategy instance */
   def roleBasedAuthorization = new RoleBasedAuthorizationStrategy();
