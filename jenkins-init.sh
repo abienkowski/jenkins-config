@@ -68,4 +68,4 @@ fi
 export PATH=$JENKINS_HOME/.local/bin:$PATH
 
 # -- execute the jenkins.sh script from parent image
-exec /bin/tini -- /usr/local/bin/jenkins.sh
+exec /sbin/tini -- /usr/local/bin/jenkins.sh
