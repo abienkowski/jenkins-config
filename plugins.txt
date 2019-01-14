@@ -17,8 +17,6 @@ docker-commons
 docker-workflow
 durable-task
 email-ext
-envinject
-envinject-api
 external-monitor-job
 git
 git-client
@@ -41,7 +39,6 @@ mapdb-api
 matrix-auth
 matrix-project
 momentjs
-jenkins-multijob-plugin
 nexus-jenkins-plugin
 pam-auth
 pipeline-build-step
